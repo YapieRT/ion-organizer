@@ -1,0 +1,23 @@
+@import './variables.scss';
+
+.Header {
+  position: relative;
+  background-color: white;
+  height: 4.5rem;
+  text-align: center;
+  color: black;
+}
+
+.ION {
+  position: absolute;
+  top: 1rem;
+  left: 2%;
+}
+
+hr {
+  position: absolute;
+  bottom: 0rem;
+  color: $lightBlue;
+  margin: 0 2.5% 0 2.5%;
+  width: 95%;
+}

@@ -1,0 +1,77 @@
+@import './variables.scss';
+
+.Header {
+  position: relative;
+  background-color: white;
+  height: 4.5rem;
+  text-align: center;
+  color: black;
+}
+
+.ION {
+  position: absolute;
+  top: 1rem;
+  left: 2%;
+  a {
+    text-decoration: none;
+    color: inherit;
+    b {
+      font-size: $fontSizeBasic;
+    }
+  }
+}
+
+.getIN {
+  .text {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+  }
+  font-family: $fontFamilyBasic;
+  height: 2.5rem;
+  width: 9rem;
+  border-radius: 3rem;
+  position: absolute;
+  border-width: calc(0.1rem + 0.1vmin);
+  top: 0.75rem;
+  right: 2%;
+  background-color: white;
+  transition: 0.5s;
+}
+
+.getIN:hover {
+  background-color: $lightBlue;
+  cursor: pointer;
+}
+
+.arrow {
+  position: absolute;
+  top: 20%;
+  height: 1.5rem;
+  width: 1.5rem;
+  right: 3%;
+}
+
+hr {
+  position: absolute;
+  bottom: 0rem;
+  color: $lightBlue;
+  margin: 0 2.5% 0 2.5%;
+  width: 95%;
+}
+
+nav {
+  position: relative;
+  top: 1rem;
+  ul,
+  li {
+    margin: 0 2rem 0 0;
+    display: inline-block;
+  }
+  a,
+  a:hover,
+  a:focus,
+  a:active {
+    text-decoration: none;
+    color: inherit;
+  }
+}

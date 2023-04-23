@@ -1,0 +1,131 @@
+@import './variables.scss';
+
+.container,
+form {
+  position: relative;
+  margin: 0 auto;
+}
+
+.container {
+  height: auto;
+  width: 75%;
+  b {
+    font-size: 3rem;
+    text-align: center;
+  }
+  top: 5rem;
+}
+
+form {
+  font-family: $fontFamilyBasic;
+  top: 2rem;
+  left: 20rem;
+
+  .formNameRegistration,
+  .formEmailRegistration,
+  .formOrganizationRegistration,
+  .formPasswordRegistration,
+  .formEmailLogIn,
+  .formPasswordLogIn {
+    display: block;
+    position: absolute;
+    label {
+      display: block;
+    }
+    input {
+      top: 3rem;
+      display: block;
+      position: absolute;
+    }
+  }
+  .formEmailRegistration {
+    top: 7rem;
+  }
+  .formOrganizationRegistration {
+    top: 14rem;
+  }
+  .formPasswordRegistration {
+    top: 21rem;
+  }
+
+  .formEmailLogIn {
+    top: 2rem;
+  }
+  .formPasswordLogIn {
+    top: 10rem;
+  }
+}
+
+.registrationText,
+.buttonRegister,
+.buttonLogIn {
+  font-family: $fontFamilyBasic;
+  font-size: 1.5rem;
+  height: 3rem;
+  padding-left: 1rem;
+  width: 40rem;
+  border-radius: 3rem;
+  border-width: calc(0.1rem + 0.1vmin);
+  background-color: white;
+}
+
+.buttonRegister,
+.buttonLogIn {
+  font-size: 2rem;
+  display: block;
+  position: absolute;
+  top: 33rem;
+  left: 0rem;
+  width: 48rem;
+  height: 4rem;
+  margin: auto;
+  background-color: black;
+  color: white;
+  box-shadow: none;
+  transition: 0.5s;
+}
+.buttonLogIn {
+  top: 24rem;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #ccc;
+  border-color: #ccc;
+  transition: 0.5s;
+}
+
+.login,
+.register {
+  margin: 0;
+  position: fixed;
+  font-size: $fontFamilyBasic;
+  right: 47%;
+  top: 53rem;
+  text-decoration: none;
+  color: black;
+  transition: 0.5s;
+}
+
+.register {
+  right: 54rem;
+  top: 45rem;
+}
+.login:hover,
+.register:hover {
+  color: #ccc;
+  transition: 0.5s;
+}
+
+.errormsgRegistration,
+.errormsgLogin {
+  position: relative;
+  text-align: center;
+  top: 31rem;
+  color: red;
+  margin: 0;
+}
+
+.errormsgLogin {
+  top: 22rem;
+}
