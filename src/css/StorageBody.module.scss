@@ -1,0 +1,148 @@
+@import './variables.scss';
+
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+}
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 1%;
+
+  .table {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    font-weight: bold;
+    background-color: #eee;
+  }
+  .cellRow {
+    display: flex;
+    flex-direction: row;
+    .cell {
+      flex: 1;
+      border: 1px solid #ccc;
+      padding: 0.5em;
+      text-align: center;
+      .code {
+        flex: 0.2;
+      }
+
+      .name {
+        flex: 0.4;
+      }
+
+      .quantity {
+        flex: 0.2;
+      }
+
+      .actions {
+        flex: 0.2;
+      }
+    }
+  }
+}
+
+.formContainer {
+  margin: 0;
+  margin-top: 1rem;
+  margin-right: 0;
+  display: flex;
+  flex-direction: column;
+
+  width: 50%;
+  .logOutButton,
+  .startInventarizationButton {
+    text-decoration: none;
+    position: sticky;
+    cursor: pointer;
+    align-self: flex-end;
+    color: black;
+    font-family: $fontFamilyBasic;
+    font-size: 1.5rem;
+    height: 3rem;
+    border: 3px solid black;
+    border-radius: 1rem;
+    border-width: calc(0.05rem + 0.1vmin);
+    background-color: white;
+    margin-left: 0%;
+    margin-top: 12%;
+    margin-right: 14%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25rem;
+    flex-direction: column;
+  }
+  .startInventarizationButton {
+    height: 5rem;
+    width: 30rem;
+    margin-right: 10%;
+    background-color: black;
+    color: white;
+    margin-top: 10%;
+    transition: 0.5s;
+  }
+  .startInventarizationButton:hover {
+    background-color: #ccc;
+    transition: 0.5s;
+    color: black;
+  }
+
+  form {
+    margin-left: 0;
+    border-radius: 2rem;
+    border: 1px solid black;
+    h4 {
+      margin: 0;
+    }
+    .formElement {
+      input {
+        margin-left: 0.5rem;
+        padding-left: 1rem;
+      }
+    }
+    p {
+      margin: 0;
+      margin-top: 5%;
+    }
+    padding: 3rem;
+    padding-bottom: 2rem;
+    flex-direction: column;
+    display: flex;
+  }
+}
+
+.labelInputText,
+.buttonAddItem {
+  font-family: $fontFamilyBasic;
+  font-size: 1rem;
+  height: 3rem;
+  margin-top: 2rem;
+  border: 3px solid black;
+  border-radius: 1rem;
+  border-width: calc(0.05rem + 0.1vmin);
+  background-color: white;
+  transition: 0.5s;
+}
+.labelInputText {
+  height: 2rem;
+}
+.buttonAddItem {
+  font-size: 2rem;
+}
+.logOutButton:hover,
+.buttonAddItem:hover {
+  cursor: pointer;
+  background-color: #ccc;
+  border-color: #ccc;
+  transition: 0.5s;
+}

@@ -8,7 +8,7 @@ function Header(props) {
   return (
     <div className={styles.Header}>
       <div className={styles.ION}>
-        <Link to="/" style={{}}>
+        <Link to='/' style={{}}>
           <b>ION</b>
         </Link>
       </div>
@@ -25,11 +25,11 @@ function Header(props) {
           </li>
         </ul>
       </nav>
-      <Link to="/registration">
-        <button type="button" className={styles.getIN}>
+      <Link to='/registration'>
+        <button type='button' className={styles.getIN}>
           {' '}
           <div className={styles.text}>Get in</div>
-          <img className={styles.arrow} src={arrow} alt="Get in" />
+          <img className={styles.arrow} src={arrow} alt='Get in' />
         </button>
       </Link>
       {line}
