@@ -1,5 +1,5 @@
-import styles from '../css/Header.module.scss';
-import arrow from '../img/right-arrow.png';
+import styles from '../../css/Headers/Header.module.scss';
+import arrow from '../../img/right-arrow.png';
 import { Link } from 'react-router-dom';
 
 const line = 1 ? <hr /> : '';

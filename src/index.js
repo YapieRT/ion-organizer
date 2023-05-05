@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './index.scss';
 
-import Registration from './components/Registration';
-import LogIn from './components/LogIn';
+import Registration from './components/Registration/Registration';
+import LogIn from './components/Login/LogIn';
 import BaseLayout from './routes/BaseLayout';
 import MainPage from './components/MainPage';
-import Storage from './components/Storage';
+import Storage from './components/Storage/Storage';
+import Inventarization from './components/Storage/Inventarization/Inventarization';
 
 const router = createBrowserRouter([
   { path: '/', element: <MainPage /> },
@@ -19,6 +20,8 @@ const router = createBrowserRouter([
       { path: '/login', element: <LogIn /> },
     ],
   },
+
+  { path: '/storage/inventarization', element: <Inventarization /> },
   { path: '/storage', element: <Storage /> },
 ]);
 

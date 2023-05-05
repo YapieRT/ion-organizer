@@ -1,0 +1,146 @@
+@import '../variables.scss';
+
+.mainContainer {
+  position: fixed;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.listContainerSmall {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+
+  margin-left: 1%;
+  b {
+    text-align: center;
+  }
+  .table {
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    margin-top: 1em;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    font-weight: bold;
+    background-color: #eee;
+  }
+  .cellRow {
+    display: flex;
+    flex-direction: row;
+    .cell {
+      flex: 1;
+      border: 1px solid #ccc;
+      padding: 0.5em;
+      text-align: center;
+      .code {
+        flex: 0.2;
+      }
+
+      .name {
+        flex: 0.4;
+      }
+
+      .quantity {
+        flex: 0.2;
+      }
+
+      .actions {
+        flex: 0.2;
+      }
+    }
+  }
+}
+
+.listContainerLarge {
+  display: flex;
+  flex-grow: 2;
+  flex-direction: column;
+
+  margin-left: 1%;
+  b {
+    text-align: center;
+  }
+  .table {
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    margin-top: 1em;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    font-weight: bold;
+    background-color: #eee;
+  }
+  .cellRow {
+    display: flex;
+    flex-direction: row;
+    .cell {
+      flex: 1;
+      border: 1px solid #ccc;
+      padding: 0.5em;
+      text-align: center;
+      .code {
+        flex: 0.2;
+      }
+
+      .name {
+        flex: 0.4;
+      }
+
+      .quantity {
+        flex: 0.2;
+      }
+
+      .actions {
+        flex: 0.2;
+      }
+    }
+  }
+}
+
+.formContainer {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    h4 {
+      display: flex;
+      margin: 0;
+    }
+    .formElement {
+      display: flex;
+      input {
+        display: flex;
+      }
+    }
+    p {
+      display: flex;
+      margin: 0;
+    }
+    button {
+      display: flex;
+      margin: 0;
+    }
+  }
+}
+
+.labelInputText {
+  .backToButton:hover,
+  .buttonAddItem:hover {
+    cursor: pointer;
+    background-color: #ccc;
+    border-color: #ccc;
+    transition: 0.5s;
+  }
+}

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StorageBody from './StorageBody';
 import axios from 'axios';
-import AdditionalHeader from './AdditionalHeader';
+import AdditionalHeader from '../Headers/AdditionalHeader';
 
 function Storage() {
   document.title = 'ION - Storage';

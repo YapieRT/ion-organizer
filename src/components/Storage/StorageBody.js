@@ -1,4 +1,4 @@
-import styles from '../css/StorageBody.module.scss';
+import styles from '../../css/Storage/StorageBody.module.scss';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -31,14 +31,35 @@ function StorageBody(props) {
 
   const handleRemove = async (item) => {
     try {
-      const response = await axios.post('/storage/removeItem', item);
-      const updatedListItems = items.filter((listItem) => listItem._id !== item._id);
+      item['email'] = email;
+      await axios.post('http://localhost:8080/storage/removeItem', item);
+      const updatedListItems = items.filter((listItem) => listItem.code !== item.code);
       setItems(updatedListItems);
     } catch (err) {
       console.log(err);
     }
   };
+  const addItemUpdate = (newItem) => {
+    const existingItemIndex = items.findIndex(
+      (listItem) => listItem.code === newItem.code && listItem.name === newItem.name
+    );
 
+    if (existingItemIndex >= 0) {
+      const existingItem = items[existingItemIndex];
+      const updatedItem = { ...existingItem, quantity: existingItem.quantity + Number(newItem.quantity) };
+      const updatedListItems = [...items];
+      updatedListItems[existingItemIndex] = updatedItem;
+      setItems(updatedListItems);
+      return;
+    }
+
+    const existingWrongItemIndex = items.some((listItem) => listItem.code === newItem.code);
+
+    if (!existingWrongItemIndex) {
+      setItems([...items, newItem]);
+      return;
+    }
+  };
   const addItemHandler = async (event) => {
     event.preventDefault();
 
@@ -46,16 +67,11 @@ function StorageBody(props) {
       code: enteredCode,
       name: enteredName,
       email: email,
-      quantity: enteredQuantity,
-    };
-    const newItem = {
-      code: enteredCode,
-      name: enteredName,
-      quantity: enteredQuantity,
+      quantity: Number(enteredQuantity),
     };
 
     try {
-      const response = await axios
+      await axios
         .post('http://localhost:8080/storage/addItem', postData)
         .then((response) => {
           setAddItemResponse(response.data.message);
@@ -64,28 +80,7 @@ function StorageBody(props) {
           const erorrResponse = error.response.data.message;
           setAddItemResponse(erorrResponse);
         });
-
-      const existingItemIndex = items.findIndex(
-        (listItem) => listItem.code === newItem.code && listItem.name === newItem.name
-      );
-
-      if (existingItemIndex >= 0) {
-        const existingItem = items[existingItemIndex];
-        const updatedItem = { ...existingItem, quantity: existingItem.quantity + Number(newItem.quantity) };
-        const updatedListItems = [...items];
-        updatedListItems[existingItemIndex] = updatedItem;
-        setItems(updatedListItems);
-        return;
-      }
-
-      const existingWrongItemIndex = items.findIndex(
-        (listItem) => listItem.code === newItem.code && listItem.name !== newItem.name
-      );
-
-      if (!existingWrongItemIndex) {
-        setItems([...items, newItem]);
-        return;
-      }
+      await addItemUpdate(postData);
     } catch (err) {}
   };
 
@@ -123,21 +118,17 @@ function StorageBody(props) {
               </div>
             </div>
 
-            {items ? (
-              items.map((item) => (
-                <>
-                  <Item
-                    key={item._id}
-                    code={item.code}
-                    name={item.name}
-                    quantity={item.quantity}
-                    onRemove={() => handleRemove(item)}
-                  />
-                </>
-              ))
-            ) : (
-              <p>Loading items...</p>
-            )}
+            <div style={{ height: '90%', overflow: 'auto' }}>
+              {items ? (
+                items.map((item) => (
+                  <>
+                    <Item key={item.code} button={true} item={item} onRemove={() => handleRemove(item)} />
+                  </>
+                ))
+              ) : (
+                <p>Loading items...</p>
+              )}
+            </div>
           </div>
         </div>
         <div className={styles.formContainer}>
@@ -166,7 +157,7 @@ function StorageBody(props) {
             </button>
             <p>{addItemResponse}</p>
           </form>
-          <Link to='/registration' className={styles.startInventarizationButton}>
+          <Link to='/storage/inventarization' className={styles.startInventarizationButton}>
             Start Inventarization
           </Link>
           <Link to='/login' className={styles.logOutButton}>

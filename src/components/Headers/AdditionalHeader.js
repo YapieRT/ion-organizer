@@ -1,4 +1,4 @@
-import styles from '../css/AdditionalHeader.module.scss';
+import styles from '../../css/Headers/AdditionalHeader.module.scss';
 import { Link } from 'react-router-dom';
 
 const line = 1 ? <hr /> : '';

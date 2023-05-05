@@ -1,4 +1,4 @@
-import styles from '../css/RegistrationLogInBody.module.scss';
+import styles from '../../css/LoginAndRegistration/RegistrationLogInBody.module.scss';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
