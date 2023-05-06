@@ -102,114 +102,117 @@ function InventarizationBody(props) {
 
   return (
     <>
-      <div className={styles.mainContainer}>
-        <div className={styles.listContainerSmall}>
-          <b style={{ marginTop: '1rem' }}>Items in your storage</b>
+      <div>
+        <div className={styles.mainContainer}>
+          <div className={styles.listContainerSmall}>
+            <b style={{ marginTop: '1rem' }}>Items in your storage</b>
 
-          <div className={styles.table}>
-            <div className={styles.cellRow} style={{ fontWeight: 'bold' }}>
-              <div className={`${styles.cell} ${styles.code}`} style={{ border: 'none' }}>
-                Code
+            <div className={styles.table}>
+              <div className={styles.cellRow} style={{ fontWeight: 'bold' }}>
+                <div className={`${styles.cell} ${styles.code}`} style={{ border: 'none' }}>
+                  Code
+                </div>
+                <div className={`${styles.cell} ${styles.name}`} style={{ border: 'none' }}>
+                  Name
+                </div>
+                <div className={`${styles.cell} ${styles.quantity}`} style={{ border: 'none' }}>
+                  Quantity
+                </div>
               </div>
-              <div className={`${styles.cell} ${styles.name}`} style={{ border: 'none' }}>
-                Name
-              </div>
-              <div className={`${styles.cell} ${styles.quantity}`} style={{ border: 'none' }}>
-                Quantity
-              </div>
-            </div>
-            <div style={{ height: '35rem', overflow: 'auto' }}>
-              <div style={{ height: 'auto' }}>
-                {items ? (
-                  items.map((item) => (
-                    <>
-                      <Item key={item.code} button={false} item={item} onRemove={() => handleRemove(item)} />
-                    </>
-                  ))
-                ) : (
-                  <p>Loading items...</p>
-                )}
+              <div style={{ height: '35rem', overflow: 'auto' }}>
+                <div style={{ height: 'auto' }}>
+                  {items ? (
+                    items.map((item) => (
+                      <>
+                        <Item key={item.code} button={false} item={item} onRemove={() => handleRemove(item)} />
+                      </>
+                    ))
+                  ) : (
+                    <p>Loading items...</p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className={styles.listContainerLarge}>
-          <b style={{ marginTop: '1rem' }}>Items for Comparison</b>
+          <div className={styles.listContainerLarge}>
+            <b style={{ marginTop: '1rem' }}>Items for Comparison</b>
 
-          <div className={styles.table}>
-            <div className={styles.cellRow} style={{ fontWeight: 'bold' }}>
-              <div className={`${styles.cell} ${styles.code}`} style={{ border: 'none' }}>
-                Code
+            <div className={styles.table}>
+              <div className={styles.cellRow} style={{ fontWeight: 'bold' }}>
+                <div className={`${styles.cell} ${styles.code}`} style={{ border: 'none' }}>
+                  Code
+                </div>
+                <div className={`${styles.cell} ${styles.name}`} style={{ border: 'none' }}>
+                  Name
+                </div>
+                <div className={`${styles.cell} ${styles.quantity}`} style={{ border: 'none' }}>
+                  Quantity
+                </div>
+                <div className={`${styles.cell} ${styles.actions}`} style={{ border: 'none' }}>
+                  Delete
+                </div>
               </div>
-              <div className={`${styles.cell} ${styles.name}`} style={{ border: 'none' }}>
-                Name
-              </div>
-              <div className={`${styles.cell} ${styles.quantity}`} style={{ border: 'none' }}>
-                Quantity
-              </div>
-              <div className={`${styles.cell} ${styles.actions}`} style={{ border: 'none' }}>
-                Delete
-              </div>
-            </div>
 
-            <div style={{ height: '35rem', overflow: 'auto' }}>
-              <div style={{ height: 'auto' }}>
-                {comparisonItems ? (
-                  comparisonItems.map((item) => (
-                    <>
-                      <Item key={item.code} button={true} item={item} onRemove={() => handleRemove(item)} />
-                    </>
-                  ))
-                ) : (
-                  <p>Loading items...</p>
-                )}
+              <div style={{ height: '35rem', overflow: 'auto' }}>
+                <div style={{ height: 'auto' }}>
+                  {comparisonItems ? (
+                    comparisonItems.map((item) => (
+                      <>
+                        <Item key={item.code} button={true} item={item} onRemove={() => handleRemove(item)} />
+                      </>
+                    ))
+                  ) : (
+                    <p>Loading items...</p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className={styles.formContainer}>
-          {' '}
-          <form onSubmit={addItemHandler}>
-            <h4>Add item to your Storage:</h4>
-            <div className={styles.formElement}>
-              <label>Code:</label>
-              <input className={styles.labelInputText} id='code' type='text' onChange={codeChangeHandler}></input>
-            </div>
-            <div className={styles.formElement}>
-              <label>Name:</label>
-              <input className={styles.labelInputText} id='name' type='text' onChange={nameChangeHandler}></input>
-            </div>
-            <div className={styles.formElement}>
-              <label>Quantity:</label>
-              <input
-                className={styles.labelInputText}
-                id='quantity'
-                type='number'
-                onChange={quantityChangeHandler}
-              ></input>
-            </div>
-            <button type='submit' className={styles.buttonAddItem}>
-              Add Item
-            </button>
-            <p>{itemAddResponse}</p>
-          </form>
+          <div className={styles.formContainer}>
+            {' '}
+            <form onSubmit={addItemHandler}>
+              <h4>Add item to your Storage:</h4>
+              <div className={styles.formElement}>
+                <label>Code:</label>
+                <input className={styles.labelInputText} id='code' type='text' onChange={codeChangeHandler}></input>
+              </div>
+              <div className={styles.formElement}>
+                <label>Name:</label>
+                <input className={styles.labelInputText} id='name' type='text' onChange={nameChangeHandler}></input>
+              </div>
+              <div className={styles.formElement}>
+                <label>Quantity:</label>
+                <input
+                  className={styles.labelInputText}
+                  id='quantity'
+                  type='number'
+                  onChange={quantityChangeHandler}
+                ></input>
+              </div>
+              <button type='submit' className={styles.buttonAddItem}>
+                Add Item
+              </button>
+              <p>{itemAddResponse}</p>
+            </form>
+          </div>
         </div>
+        <ComparisonResult
+          items={items}
+          comparisonItems={comparisonItems}
+          isOpen={modalOpen}
+          onClose={handleModalClose}
+        ></ComparisonResult>
+        <button className={styles.modalButton} onClick={handleModalOpen}>
+          Compare
+        </button>
+        <Link to='/storage' className={styles.backToButton}>
+          Back to Storage
+        </Link>
       </div>
-      <button className={styles.modalButton} onClick={handleModalOpen}>
-        Compare
-      </button>
-      <ComparisonResult isOpen={modalOpen} onClose={handleModalClose}>
-        <h2>Modal Content</h2>
-        <p>This is the content of the modal.</p>
-      </ComparisonResult>
     </>
   );
 }
-{
-  /* <Link to='/storage' className={styles.backToButton}>
-Back to Storage
-</Link> */
-}
+
 export default InventarizationBody;

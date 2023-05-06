@@ -1,6 +1,7 @@
 @import '../variables.scss';
 
 .mainContainer {
+  z-index: 3;
   position: fixed;
   display: flex;
   flex-direction: row;
@@ -8,19 +9,21 @@
 
 .listContainerSmall,
 .listContainerLarge {
+  z-index: 2;
   display: flex;
-
   flex-direction: column;
   width: 50rem;
   margin-left: 2%;
+
   b {
     text-align: center;
   }
+
   .table {
     display: flex;
-    height: auto;
     flex-direction: column;
     margin-top: 1rem;
+    height: auto;
   }
 
   .header {
@@ -29,14 +32,17 @@
     font-weight: bold;
     background-color: #eee;
   }
+
   .cellRow {
     display: flex;
     flex-direction: row;
+
     .cell {
       flex: 1;
       border: 1px solid #ccc;
       padding: 0.5em;
       text-align: center;
+
       .code {
         flex: 0.2;
       }
@@ -55,6 +61,7 @@
     }
   }
 }
+
 .listContainerSmall {
   width: 35rem;
 }
@@ -62,31 +69,8 @@
 .formContainer {
   display: flex;
   position: absolute;
-  z-index: -1;
   left: 70rem;
-  .logOutButton,
-  .startInventarizationButton {
-    text-decoration: none;
-    position: sticky;
-    cursor: pointer;
-    align-self: flex-end;
-    color: black;
-    font-family: $fontFamilyBasic;
-    font-size: 1.5rem;
-    height: 3rem;
-    border: 3px solid black;
-    border-radius: 1rem;
-    border-width: calc(0.05rem + 0.1vmin);
-    background-color: white;
-    margin-left: 0%;
-    margin-top: 12%;
-    margin-right: 14%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 25rem;
-    flex-direction: column;
-  }
+  z-index: -5;
 
   form {
     display: flex;
@@ -94,9 +78,11 @@
     margin-left: 0;
     border-radius: 2rem;
     border: 1px solid black;
+
     h4 {
       margin: 0;
     }
+
     .formElement {
       input {
         margin-top: 0;
@@ -104,20 +90,22 @@
         padding-left: 1rem;
       }
     }
+
     p {
       margin: 0;
       margin-top: 0;
     }
+
     padding: 3rem;
     padding-bottom: 2rem;
     flex-direction: column;
-    display: flex;
   }
 }
 
 .labelInputText,
 .buttonAddItem,
-.modalButton {
+.modalButton,
+.backToButton {
   font-family: $fontFamilyBasic;
   font-size: 1rem;
   height: 3rem;
@@ -128,13 +116,15 @@
   background-color: white;
   transition: 0.5s;
 }
+
 .labelInputText {
   height: 2rem;
 }
+
 .buttonAddItem {
   font-size: 2rem;
 }
-.logOutButton:hover,
+
 .buttonAddItem:hover {
   cursor: pointer;
   background-color: #ccc;
@@ -142,17 +132,37 @@
   transition: 0.5s;
 }
 
-.modalButton {
+.modalButton,
+.backToButton {
+  text-decoration: none;
   position: absolute;
+
+  bottom: 3rem;
+  font-size: 1.5rem;
+}
+.backToButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: black;
+  width: 20rem;
+  height: 5rem;
+  right: 5%;
+}
+.modalButton {
   background-color: black;
   color: white;
-  width: 15rem;
-  font-size: 1.5rem;
+  width: 25rem;
+  height: 5rem;
   left: 25%;
-  bottom: 5rem;
 }
 .modalButton:hover {
   color: black;
+  background-color: #ccc;
+  transition: 0.5s;
+}
+.backToButton:hover {
   background-color: #ccc;
   transition: 0.5s;
 }
