@@ -1,6 +1,7 @@
 import styles from '../../../css/Storage/InvBody.module.scss';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import ComparisonResult from './ComparisonResult';
 import axios from 'axios';
 
 import Item from './InvItem';
@@ -10,6 +11,16 @@ function InventarizationBody(props) {
   const [enteredCode, setEnteredCode] = useState('');
   const [enteredName, setEnteredName] = useState('');
   const [enteredQuantity, setEnteredQuantity] = useState('');
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
 
   const [items, setItems] = useState([]);
   const [comparisonItems, setComparisonItems] = useState([]);
@@ -93,7 +104,7 @@ function InventarizationBody(props) {
     <>
       <div className={styles.mainContainer}>
         <div className={styles.listContainerSmall}>
-          <b style={{ marginTop: '2%' }}>Your items in the Storage</b>
+          <b style={{ marginTop: '1rem' }}>Items in your storage</b>
 
           <div className={styles.table}>
             <div className={styles.cellRow} style={{ fontWeight: 'bold' }}>
@@ -107,23 +118,24 @@ function InventarizationBody(props) {
                 Quantity
               </div>
             </div>
-
-            <div className={styles.records}>
-              {items ? (
-                items.map((item) => (
-                  <>
-                    <Item key={item.code} button={false} item={item} onRemove={() => handleRemove(item)} />
-                  </>
-                ))
-              ) : (
-                <p>Loading items...</p>
-              )}
+            <div style={{ height: '35rem', overflow: 'auto' }}>
+              <div style={{ height: 'auto' }}>
+                {items ? (
+                  items.map((item) => (
+                    <>
+                      <Item key={item.code} button={false} item={item} onRemove={() => handleRemove(item)} />
+                    </>
+                  ))
+                ) : (
+                  <p>Loading items...</p>
+                )}
+              </div>
             </div>
           </div>
         </div>
 
         <div className={styles.listContainerLarge}>
-          <b style={{ marginTop: '2%' }}>Your items in the Storage</b>
+          <b style={{ marginTop: '1rem' }}>Items for Comparison</b>
 
           <div className={styles.table}>
             <div className={styles.cellRow} style={{ fontWeight: 'bold' }}>
@@ -141,16 +153,18 @@ function InventarizationBody(props) {
               </div>
             </div>
 
-            <div style={{ height: '90%', overflow: 'auto' }}>
-              {comparisonItems ? (
-                comparisonItems.map((item) => (
-                  <>
-                    <Item key={item.code} button={true} item={item} onRemove={() => handleRemove(item)} />
-                  </>
-                ))
-              ) : (
-                <p>Loading items...</p>
-              )}
+            <div style={{ height: '35rem', overflow: 'auto' }}>
+              <div style={{ height: 'auto' }}>
+                {comparisonItems ? (
+                  comparisonItems.map((item) => (
+                    <>
+                      <Item key={item.code} button={true} item={item} onRemove={() => handleRemove(item)} />
+                    </>
+                  ))
+                ) : (
+                  <p>Loading items...</p>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -183,6 +197,13 @@ function InventarizationBody(props) {
           </form>
         </div>
       </div>
+      <button className={styles.modalButton} onClick={handleModalOpen}>
+        Compare
+      </button>
+      <ComparisonResult isOpen={modalOpen} onClose={handleModalClose}>
+        <h2>Modal Content</h2>
+        <p>This is the content of the modal.</p>
+      </ComparisonResult>
     </>
   );
 }

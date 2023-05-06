@@ -3,16 +3,16 @@
 .mainContainer {
   position: fixed;
   display: flex;
-  justify-content: space-around;
   flex-direction: row;
 }
 
-.listContainerSmall {
+.listContainerSmall,
+.listContainerLarge {
   display: flex;
-  flex-grow: 1;
-  flex-direction: column;
 
-  margin-left: 1%;
+  flex-direction: column;
+  width: 50rem;
+  margin-left: 2%;
   b {
     text-align: center;
   }
@@ -20,7 +20,7 @@
     display: flex;
     height: auto;
     flex-direction: column;
-    margin-top: 1em;
+    margin-top: 1rem;
   }
 
   .header {
@@ -55,92 +55,104 @@
     }
   }
 }
-
-.listContainerLarge {
-  display: flex;
-  flex-grow: 2;
-  flex-direction: column;
-
-  margin-left: 1%;
-  b {
-    text-align: center;
-  }
-  .table {
-    display: flex;
-    height: auto;
-    flex-direction: column;
-    margin-top: 1em;
-  }
-
-  .header {
-    display: flex;
-    flex-direction: row;
-    font-weight: bold;
-    background-color: #eee;
-  }
-  .cellRow {
-    display: flex;
-    flex-direction: row;
-    .cell {
-      flex: 1;
-      border: 1px solid #ccc;
-      padding: 0.5em;
-      text-align: center;
-      .code {
-        flex: 0.2;
-      }
-
-      .name {
-        flex: 0.4;
-      }
-
-      .quantity {
-        flex: 0.2;
-      }
-
-      .actions {
-        flex: 0.2;
-      }
-    }
-  }
+.listContainerSmall {
+  width: 35rem;
 }
 
 .formContainer {
   display: flex;
-  flex-grow: 1;
-  justify-content: center;
+  position: absolute;
+  z-index: -1;
+  left: 70rem;
+  .logOutButton,
+  .startInventarizationButton {
+    text-decoration: none;
+    position: sticky;
+    cursor: pointer;
+    align-self: flex-end;
+    color: black;
+    font-family: $fontFamilyBasic;
+    font-size: 1.5rem;
+    height: 3rem;
+    border: 3px solid black;
+    border-radius: 1rem;
+    border-width: calc(0.05rem + 0.1vmin);
+    background-color: white;
+    margin-left: 0%;
+    margin-top: 12%;
+    margin-right: 14%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25rem;
+    flex-direction: column;
+  }
 
   form {
     display: flex;
-    flex-direction: column;
-
+    flex-grow: 2;
+    margin-left: 0;
+    border-radius: 2rem;
+    border: 1px solid black;
     h4 {
-      display: flex;
       margin: 0;
     }
     .formElement {
-      display: flex;
       input {
-        display: flex;
+        margin-top: 0;
+        margin-left: 0.5rem;
+        padding-left: 1rem;
       }
     }
     p {
-      display: flex;
       margin: 0;
+      margin-top: 0;
     }
-    button {
-      display: flex;
-      margin: 0;
-    }
+    padding: 3rem;
+    padding-bottom: 2rem;
+    flex-direction: column;
+    display: flex;
   }
 }
 
+.labelInputText,
+.buttonAddItem,
+.modalButton {
+  font-family: $fontFamilyBasic;
+  font-size: 1rem;
+  height: 3rem;
+  margin-top: 2rem;
+  border: 3px solid black;
+  border-radius: 1rem;
+  border-width: calc(0.05rem + 0.1vmin);
+  background-color: white;
+  transition: 0.5s;
+}
 .labelInputText {
-  .backToButton:hover,
-  .buttonAddItem:hover {
-    cursor: pointer;
-    background-color: #ccc;
-    border-color: #ccc;
-    transition: 0.5s;
-  }
+  height: 2rem;
+}
+.buttonAddItem {
+  font-size: 2rem;
+}
+.logOutButton:hover,
+.buttonAddItem:hover {
+  cursor: pointer;
+  background-color: #ccc;
+  border-color: #ccc;
+  transition: 0.5s;
+}
+
+.modalButton {
+  position: absolute;
+  background-color: black;
+  color: white;
+  width: 15rem;
+  font-size: 1.5rem;
+  left: 25%;
+  bottom: 5rem;
+}
+.modalButton:hover {
+  color: black;
+  background-color: #ccc;
+  transition: 0.5s;
 }

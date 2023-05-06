@@ -118,16 +118,18 @@ function StorageBody(props) {
               </div>
             </div>
 
-            <div style={{ height: '90%', overflow: 'auto' }}>
-              {items ? (
-                items.map((item) => (
-                  <>
-                    <Item key={item.code} button={true} item={item} onRemove={() => handleRemove(item)} />
-                  </>
-                ))
-              ) : (
-                <p>Loading items...</p>
-              )}
+            <div style={{ height: '35rem', overflow: 'auto' }}>
+              <div style={{ height: 'auto' }}>
+                {items ? (
+                  items.map((item) => (
+                    <>
+                      <Item key={item.code} button={true} item={item} onRemove={() => handleRemove(item)} />
+                    </>
+                  ))
+                ) : (
+                  <p>Loading items...</p>
+                )}
+              </div>
             </div>
           </div>
         </div>
