@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import Item from './Item';
+import ItemTable from './ItemTable';
 
 function StorageBody(props) {
   const email = props.email;
@@ -28,7 +28,9 @@ function StorageBody(props) {
 
     getItems();
   }, []);
-
+  const logOut = () => {
+    localStorage.clear();
+  };
   const handleRemove = async (item) => {
     try {
       item['email'] = email;
@@ -69,7 +71,10 @@ function StorageBody(props) {
       email: email,
       quantity: Number(enteredQuantity),
     };
-
+    if (!postData.code || !postData.name || !postData.quantity) {
+      setAddItemResponse('Missing values');
+      return;
+    }
     try {
       await axios
         .post('http://localhost:8080/storage/addItem', postData)
@@ -102,36 +107,7 @@ function StorageBody(props) {
         <div className={styles.listContainer}>
           <b style={{ marginTop: '2%' }}>Your items in the Storage</b>
 
-          <div className={styles.table}>
-            <div className={styles.cellRow} style={{ fontWeight: 'bold' }}>
-              <div className={`${styles.cell} ${styles.code}`} style={{ border: 'none' }}>
-                Code
-              </div>
-              <div className={`${styles.cell} ${styles.name}`} style={{ border: 'none' }}>
-                Name
-              </div>
-              <div className={`${styles.cell} ${styles.quantity}`} style={{ border: 'none' }}>
-                Quantity
-              </div>
-              <div className={`${styles.cell} ${styles.actions}`} style={{ border: 'none' }}>
-                Delete
-              </div>
-            </div>
-
-            <div style={{ height: '35rem', overflow: 'auto' }}>
-              <div style={{ height: 'auto' }}>
-                {items ? (
-                  items.map((item) => (
-                    <>
-                      <Item key={item.code} button={true} item={item} onRemove={() => handleRemove(item)} />
-                    </>
-                  ))
-                ) : (
-                  <p>Loading items...</p>
-                )}
-              </div>
-            </div>
-          </div>
+          <ItemTable items={items} RemoveButton={true} onRemove={() => handleRemove()} />
         </div>
         <div className={styles.formContainer}>
           {' '}
@@ -162,7 +138,7 @@ function StorageBody(props) {
           <Link to='/storage/inventarization' className={styles.startInventarizationButton}>
             Start Inventarization
           </Link>
-          <Link to='/login' className={styles.logOutButton}>
+          <Link to='/login' className={styles.logOutButton} onClick={logOut}>
             Log out
           </Link>
         </div>

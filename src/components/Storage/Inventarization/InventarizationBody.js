@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import ComparisonResult from './ComparisonResult';
 import axios from 'axios';
-
-import Item from './InvItem';
+import ItemTable from '../ItemTable';
 
 function InventarizationBody(props) {
   const [itemAddResponse, setItemAddResponse] = useState('');
@@ -82,6 +81,10 @@ function InventarizationBody(props) {
       name: enteredName,
       quantity: Number(enteredQuantity),
     };
+    if (!postData.code || !postData.name || !postData.quantity) {
+      setItemAddResponse('Missing values');
+      return;
+    }
 
     try {
       await addItemUpdate(postData);
@@ -106,68 +109,13 @@ function InventarizationBody(props) {
         <div className={styles.mainContainer}>
           <div className={styles.listContainerSmall}>
             <b style={{ marginTop: '1rem' }}>Items in your storage</b>
-
-            <div className={styles.table}>
-              <div className={styles.cellRow} style={{ fontWeight: 'bold' }}>
-                <div className={`${styles.cell} ${styles.code}`} style={{ border: 'none' }}>
-                  Code
-                </div>
-                <div className={`${styles.cell} ${styles.name}`} style={{ border: 'none' }}>
-                  Name
-                </div>
-                <div className={`${styles.cell} ${styles.quantity}`} style={{ border: 'none' }}>
-                  Quantity
-                </div>
-              </div>
-              <div style={{ height: '35rem', overflow: 'auto' }}>
-                <div style={{ height: 'auto' }}>
-                  {items ? (
-                    items.map((item) => (
-                      <>
-                        <Item key={item.code} button={false} item={item} onRemove={() => handleRemove(item)} />
-                      </>
-                    ))
-                  ) : (
-                    <p>Loading items...</p>
-                  )}
-                </div>
-              </div>
-            </div>
+            <ItemTable items={items} RemoveButton={false} />
           </div>
 
           <div className={styles.listContainerLarge}>
             <b style={{ marginTop: '1rem' }}>Items for Comparison</b>
 
-            <div className={styles.table}>
-              <div className={styles.cellRow} style={{ fontWeight: 'bold' }}>
-                <div className={`${styles.cell} ${styles.code}`} style={{ border: 'none' }}>
-                  Code
-                </div>
-                <div className={`${styles.cell} ${styles.name}`} style={{ border: 'none' }}>
-                  Name
-                </div>
-                <div className={`${styles.cell} ${styles.quantity}`} style={{ border: 'none' }}>
-                  Quantity
-                </div>
-                <div className={`${styles.cell} ${styles.actions}`} style={{ border: 'none' }}>
-                  Delete
-                </div>
-              </div>
-
-              <div style={{ height: '35rem', overflow: 'auto' }}>
-                <div style={{ height: 'auto' }}>
-                  {comparisonItems ? (
-                    comparisonItems.map((item) => (
-                      <>
-                        <Item key={item.code} button={true} item={item} onRemove={() => handleRemove(item)} />
-                      </>
-                    ))
-                  ) : (
-                    <p>Loading items...</p>
-                  )}
-                </div>
-              </div>
-            </div>
+            <ItemTable items={comparisonItems} RemoveButton={true} onRemove={() => handleRemove()} />
           </div>
 
           <div className={styles.formContainer}>

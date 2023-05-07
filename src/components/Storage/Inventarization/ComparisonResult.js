@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../../../css/Storage/ComparisonResult.module.scss';
-import Item from './CompItem';
+
+import ItemTable from '../ItemTable';
 
 const ComparisonResult = ({ items, comparisonItems, isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -64,68 +65,12 @@ const ComparisonResult = ({ items, comparisonItems, isOpen, onClose }) => {
         <div className={styles.containers}>
           <div className={styles.listContainer}>
             <b style={{ marginTop: '1rem' }}>Missing Items</b>
-
-            <div className={styles.table}>
-              <div className={styles.cellRow} style={{ fontWeight: 'bold' }}>
-                <div className={`${styles.cell} ${styles.code}`} style={{ border: 'none' }}>
-                  Code
-                </div>
-                <div className={`${styles.cell} ${styles.name}`} style={{ border: 'none' }}>
-                  Name
-                </div>
-                <div className={`${styles.cell} ${styles.quantity}`} style={{ border: 'none' }}>
-                  Quantity
-                </div>
-              </div>
-              <div style={{ height: '35rem', overflow: 'auto' }}>
-                <div style={{ height: 'auto' }}>
-                  {missingItems ? (
-                    missingItems.map((item) => (
-                      <>
-                        <Item key={item.code} button={false} item={item} />
-                      </>
-                    ))
-                  ) : (
-                    <p>Loading items...</p>
-                  )}
-                </div>
-              </div>
-            </div>
+            <ItemTable items={missingItems} RemoveButton={false} />
           </div>
 
           <div className={styles.listContainer}>
             <b style={{ marginTop: '1rem' }}>New Items</b>
-
-            <div className={styles.table}>
-              <div className={styles.cellRow} style={{ fontWeight: 'bold' }}>
-                <div className={`${styles.cell} ${styles.code}`} style={{ border: 'none' }}>
-                  Code
-                </div>
-                <div className={`${styles.cell} ${styles.name}`} style={{ border: 'none' }}>
-                  Name
-                </div>
-                <div className={`${styles.cell} ${styles.quantity}`} style={{ border: 'none' }}>
-                  Quantity
-                </div>
-                <div className={`${styles.cell} ${styles.actions}`} style={{ border: 'none' }}>
-                  Delete
-                </div>
-              </div>
-
-              <div style={{ height: '35rem', overflow: 'auto' }}>
-                <div style={{ height: 'auto' }}>
-                  {newItems ? (
-                    newItems.map((item) => (
-                      <>
-                        <Item key={item.code} button={false} item={item} />
-                      </>
-                    ))
-                  ) : (
-                    <p>Loading items...</p>
-                  )}
-                </div>
-              </div>
-            </div>
+            <ItemTable items={newItems} RemoveButton={false} />
           </div>
         </div>
         <button className={styles.modalClose} onClick={onClose}>

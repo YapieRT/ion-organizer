@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../css/Storage/StorageBody.module.scss';
+import styles from '../../css/Storage/ItemTable.module.scss';
 
 function Item({ item, onRemove, button }) {
   const handleRemove = () => {
@@ -13,20 +13,21 @@ function Item({ item, onRemove, button }) {
     ''
   );
 
-  return (
-    <div className={styles.cellRow}>
-      <div className={`${styles.cell} ${styles.code}`} title={item.code}>
-        {item.code}
+  if (!Object.is(item, null))
+    return (
+      <div className={styles.cellRow}>
+        <div className={`${styles.cell} ${styles.code}`} title={item.code}>
+          {item.code}
+        </div>
+        <div className={`${styles.cell} ${styles.name}`} title={item.name}>
+          {item.name}
+        </div>
+        <div className={`${styles.cell} ${styles.quantity}`} title={`${item.code} + pc.`}>
+          {item.quantity} pc.
+        </div>
+        {buttonRemove}
       </div>
-      <div className={`${styles.cell} ${styles.name}`} title={item.name}>
-        {item.name}
-      </div>
-      <div className={`${styles.cell} ${styles.quantity}`} title={`${item.code} + pc.`}>
-        {item.quantity} pc.
-      </div>
-      {buttonRemove}
-    </div>
-  );
+    );
+  else return;
 }
-
 export default Item;

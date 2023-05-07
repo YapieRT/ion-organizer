@@ -23,48 +23,6 @@
       b {
         text-align: center;
       }
-
-      .table {
-        display: flex;
-        flex-direction: column;
-        margin-top: 1rem;
-        height: auto;
-      }
-
-      .header {
-        display: flex;
-        flex-direction: row;
-        font-weight: bold;
-        background-color: #eee;
-      }
-
-      .cellRow {
-        display: flex;
-        flex-direction: row;
-
-        .cell {
-          flex: 1;
-          border: 1px solid #ccc;
-          padding: 0.5em;
-          text-align: center;
-
-          .code {
-            flex: 0.2;
-          }
-
-          .name {
-            flex: 0.4;
-          }
-
-          .quantity {
-            flex: 0.2;
-          }
-
-          .actions {
-            flex: 0.2;
-          }
-        }
-      }
     }
   }
   .modalClose {
