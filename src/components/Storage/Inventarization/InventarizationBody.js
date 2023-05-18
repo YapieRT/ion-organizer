@@ -115,7 +115,7 @@ function InventarizationBody(props) {
           <div className={styles.listContainerLarge}>
             <b style={{ marginTop: '1rem' }}>Items for Comparison</b>
 
-            <ItemTable items={comparisonItems} RemoveButton={true} onRemove={() => handleRemove()} />
+            <ItemTable items={comparisonItems} RemoveButton={true} onRemove={(item) => handleRemove(item)} />
           </div>
 
           <div className={styles.formContainer}>

@@ -3,7 +3,7 @@ import styles from '../../css/Storage/ItemTable.module.scss';
 import Item from './Item';
 
 function ItemTable({ items, RemoveButton, onRemove }) {
-  const handleRemove = (item) => {
+  const handleRemove = async (item) => {
     onRemove(item);
   };
 

@@ -64,7 +64,7 @@ form {
   height: 3rem;
   padding-left: 1rem;
   width: 40rem;
-  border-radius: 3rem;
+  border-radius: 1rem;
   border-width: calc(0.1rem + 0.1vmin);
   background-color: white;
 }
@@ -92,6 +92,7 @@ button:hover {
   cursor: pointer;
   background-color: #ccc;
   border-color: #ccc;
+  color: black;
   transition: 0.5s;
 }
 

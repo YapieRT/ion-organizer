@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../../css/Storage/ItemTable.module.scss';
 
 function Item({ item, onRemove, button }) {
-  const handleRemove = () => {
+  const handleRemove = async () => {
     onRemove(item);
   };
   const buttonRemove = button ? (

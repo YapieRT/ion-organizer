@@ -5,6 +5,7 @@ function MainPage() {
   return (
     <>
       <Header />
+      <h3>Welcome to ION</h3>
     </>
   );
 }

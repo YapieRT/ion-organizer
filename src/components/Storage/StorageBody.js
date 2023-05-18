@@ -33,6 +33,7 @@ function StorageBody(props) {
   };
   const handleRemove = async (item) => {
     try {
+      console.log(item);
       item['email'] = email;
       await axios.post('http://localhost:8080/storage/removeItem', item);
       const updatedListItems = items.filter((listItem) => listItem.code !== item.code);
@@ -107,7 +108,7 @@ function StorageBody(props) {
         <div className={styles.listContainer}>
           <b style={{ marginTop: '2%' }}>Your items in the Storage</b>
 
-          <ItemTable items={items} RemoveButton={true} onRemove={() => handleRemove()} />
+          <ItemTable items={items} RemoveButton={true} onRemove={(item) => handleRemove(item)} />
         </div>
         <div className={styles.formContainer}>
           {' '}
