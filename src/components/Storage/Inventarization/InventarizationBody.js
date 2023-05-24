@@ -78,7 +78,7 @@ function InventarizationBody(props) {
 
     const postData = {
       code: enteredCode,
-      name: enteredName,
+      name: enteredName.trim(),
       quantity: Number(enteredQuantity),
     };
     if (!postData.code || !postData.name || !postData.quantity) {

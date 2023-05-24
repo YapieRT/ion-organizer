@@ -68,7 +68,7 @@ function StorageBody(props) {
 
     const postData = {
       code: enteredCode,
-      name: enteredName,
+      name: enteredName.trim(),
       email: email,
       quantity: Number(enteredQuantity),
     };
