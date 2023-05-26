@@ -45,7 +45,7 @@ function Registration() {
 
       setErrorMsg('');
 
-      await axios('http://localhost:8080/registration', postData)
+      await axios('http://localhost:8080/api/registration', postData)
         .then((response) => {
           if (response.data.auth === true) {
             localStorage.setItem('token', response.data.token);

@@ -41,7 +41,7 @@ function Inventarization() {
     const getItems = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:8080/storage/getItems', {
+        const response = await axios.get('http://localhost:8080/api/storage/getItems', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setItems(response.data);

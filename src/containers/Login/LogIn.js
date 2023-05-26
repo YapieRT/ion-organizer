@@ -33,7 +33,7 @@ function LogIn() {
       setErrorMsg('');
 
       await axios
-        .post('http://localhost:8080/login', postData)
+        .post('http://localhost:8080/api/login', postData)
         .then((response) => {
           if (response.data.auth === true) {
             localStorage.setItem('token', response.data.token);

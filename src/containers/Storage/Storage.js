@@ -18,7 +18,7 @@ function Storage() {
     const getItems = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:8080/storage/getItems', {
+        const response = await axios.get('http://localhost:8080/api/storage/getItems', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setItems(response.data);
@@ -92,7 +92,7 @@ function Storage() {
     }
     try {
       await axios
-        .post('http://localhost:8080/storage/addItem', postData)
+        .post('http://localhost:8080/api/storage/addItem', postData)
         .then((response) => {
           setAddItemResponse(response.data.message);
         })
