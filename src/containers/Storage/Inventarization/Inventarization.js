@@ -1,11 +1,12 @@
-import styles from '../../../css/Storage/InvBody.module.scss';
-import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import ComparisonResult from './ComparisonResult';
+import { useEffect, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import styles from '../../../css/Storage/Inventarization.module.scss';
+import ComparisonResult from './ComparisonResult';
 import ItemTable from '../ItemTable';
 
-function InventarizationBody(props) {
+function Inventarization() {
+  const navigate = useNavigate();
   const [itemAddResponse, setItemAddResponse] = useState('');
   const [enteredCode, setEnteredCode] = useState('');
   const [enteredName, setEnteredName] = useState('');
@@ -25,6 +26,18 @@ function InventarizationBody(props) {
   const [comparisonItems, setComparisonItems] = useState([]);
 
   useEffect(() => {
+    const verify = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        await axios.get('http://localhost:8080/UserAuth', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+      } catch (err) {
+        if (err.response && err.response.status === 401) {
+          navigate('/login', {});
+        }
+      }
+    };
     const getItems = async () => {
       try {
         const token = localStorage.getItem('token');
@@ -36,9 +49,9 @@ function InventarizationBody(props) {
         console.log(err);
       }
     };
-
+    verify();
     getItems();
-  }, []);
+  });
 
   const handleRemove = async (item) => {
     try {
@@ -102,7 +115,6 @@ function InventarizationBody(props) {
   function quantityChangeHandler(event) {
     setEnteredQuantity(event.target.value);
   }
-
   return (
     <>
       <div>
@@ -163,4 +175,4 @@ function InventarizationBody(props) {
   );
 }
 
-export default InventarizationBody;
+export default Inventarization;

@@ -3,26 +3,32 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './index.scss';
 
-import Registration from './components/Registration/Registration';
-import LogIn from './components/Login/LogIn';
+import Registration from './containers/Registration/Registration';
+import LogIn from './containers/Login/LogIn';
 import BaseLayout from './routes/BaseLayout';
-import MainPage from './components/MainPage';
-import Storage from './components/Storage/Storage';
-import Inventarization from './components/Storage/Inventarization/Inventarization';
+import MainPage from './containers/MainPage';
+import Storage from './containers/Storage/Storage';
+import Inventarization from './containers/Storage/Inventarization/Inventarization';
 
 const router = createBrowserRouter([
   { path: '/', element: <MainPage /> },
   {
     path: '',
-    element: <BaseLayout />,
+    element: <BaseLayout linkTo='/' />,
     children: [
       { path: '/registration', element: <Registration /> },
       { path: '/login', element: <LogIn /> },
     ],
   },
 
-  { path: '/storage/inventarization', element: <Inventarization /> },
-  { path: '/storage', element: <Storage /> },
+  {
+    path: '',
+    element: <BaseLayout linkTo='/storage' />,
+    children: [
+      { path: '/storage/inventarization', element: <Inventarization /> },
+      { path: '/storage', element: <Storage /> },
+    ],
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

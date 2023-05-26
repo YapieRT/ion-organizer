@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom';
-import AdditionalHeader from '../components/Headers/AdditionalHeader';
+import Header from '../components/Headers/Header';
 
-function BaseLayout() {
+function BaseLayout(props) {
   return (
     <>
-      <AdditionalHeader linkTo='/' />
+      <Header linkTo={props.linkTo} />
       <Outlet />
     </>
   );

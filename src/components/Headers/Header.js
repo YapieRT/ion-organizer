@@ -2,16 +2,10 @@ import styles from '../../css/Headers/Header.module.scss';
 import arrow from '../../img/right-arrow.png';
 import { Link } from 'react-router-dom';
 
-const line = 1 ? <hr /> : '';
-
 function Header(props) {
-  return (
-    <div className={styles.Header}>
-      <div className={styles.ION}>
-        <Link to='/' style={{}}>
-          <b>ION</b>
-        </Link>
-      </div>
+  const navs = props.navs ? (
+    <>
+      {' '}
       <nav>
         <ul>
           <li>
@@ -32,7 +26,18 @@ function Header(props) {
           <img className={styles.arrow} src={arrow} alt='Get in' />
         </button>
       </Link>
-      {line}
+    </>
+  ) : (
+    <> </>
+  );
+  return (
+    <div className={styles.Header}>
+      <div className={styles.ION}>
+        <Link to={props.linkTo} style={{}}>
+          <b>ION</b>
+        </Link>
+      </div>
+      {navs}
     </div>
   );
 }

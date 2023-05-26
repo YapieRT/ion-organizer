@@ -1,10 +1,10 @@
 import '../css/MainPage.module.scss';
-import Header from './Headers/Header';
+import Header from '../components/Headers/Header';
 
 function MainPage() {
   return (
     <>
-      <Header />
+      <Header linkTo='/' navs={true} />
       <h3>Welcome to ION</h3>
     </>
   );
