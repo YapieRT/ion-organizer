@@ -29,7 +29,7 @@ function Storage() {
     const verify = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:8080/UserAuth', {
+        const response = await axios.get('http://localhost:8080/api/UserAuth', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserEmail(response.data.email);
@@ -49,7 +49,7 @@ function Storage() {
     try {
       console.log(item);
       item['email'] = userEmail;
-      await axios.post('http://localhost:8080/storage/removeItem', item);
+      await axios.delete('http://localhost:8080/api/storage/removeItem', item);
       const updatedListItems = items.filter((listItem) => listItem.code !== item.code);
       setItems(updatedListItems);
     } catch (err) {

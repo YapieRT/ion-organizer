@@ -29,7 +29,7 @@ function Inventarization() {
     const verify = async () => {
       try {
         const token = localStorage.getItem('token');
-        await axios.get('http://localhost:8080/UserAuth', {
+        await axios.get('http://localhost:8080/api/UserAuth', {
           headers: { Authorization: `Bearer ${token}` },
         });
       } catch (err) {
