@@ -16,7 +16,7 @@ To install UI you need :
 
 **NOTE**
 
-    By default ip for backend server is set to http://localhost:8000. You can change in .env file.
+    By default ip for backend server is set to http://localhost:8080. You can change in .env file.
 
 ---
 
