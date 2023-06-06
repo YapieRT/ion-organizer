@@ -6,6 +6,9 @@ import ItemTable from './ItemTable';
 
 function Storage() {
   document.title = 'ION - Storage';
+
+  const ip = process.env.REACT_APP_BACKEND_IP;
+
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState('');
   const [enteredCode, setEnteredCode] = useState('');
@@ -18,7 +21,7 @@ function Storage() {
     const getItems = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:8080/api/storage/getItems', {
+        const response = await axios.get(`${ip}/api/storage/getItems`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setItems(response.data);
@@ -29,7 +32,7 @@ function Storage() {
     const verify = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:8080/api/UserAuth', {
+        const response = await axios.get(`${ip}/api/UserAuth`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserEmail(response.data.email);
@@ -49,7 +52,7 @@ function Storage() {
     try {
       console.log(item);
       item['email'] = userEmail;
-      await axios.delete('http://localhost:8080/api/storage/removeItem', item);
+      await axios.delete(`${ip}/api/storage/removeItem`, item);
       const updatedListItems = items.filter((listItem) => listItem.code !== item.code);
       setItems(updatedListItems);
     } catch (err) {
@@ -92,7 +95,7 @@ function Storage() {
     }
     try {
       await axios
-        .post('http://localhost:8080/api/storage/addItem', postData)
+        .post(`${ip}/api/storage/addItem`, postData)
         .then((response) => {
           setAddItemResponse(response.data.message);
         })

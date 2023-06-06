@@ -7,6 +7,8 @@ function Registration() {
   document.title = 'ION - Registration';
   const navigate = useNavigate();
 
+  const ip = process.env.REACT_APP_BACKEND_IP;
+
   let [errormsg, setErrorMsg] = useState('');
   const [enteredName, setEnteredName] = useState('');
   const [enteredEmail, setEnteredEmail] = useState('');
@@ -45,7 +47,7 @@ function Registration() {
 
       setErrorMsg('');
 
-      await axios('http://localhost:8080/api/registration', postData)
+      await axios(`${ip}/api/registration`, postData)
         .then((response) => {
           if (response.data.auth === true) {
             localStorage.setItem('token', response.data.token);

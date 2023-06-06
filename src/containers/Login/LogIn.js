@@ -7,6 +7,8 @@ function LogIn() {
   document.title = 'ION - Log In';
   const navigate = useNavigate();
 
+  const ip = process.env.REACT_APP_BACKEND_IP;
+
   const [errormsg, setErrorMsg] = useState('');
   const [enteredEmail, setEnteredEmail] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
@@ -33,7 +35,7 @@ function LogIn() {
       setErrorMsg('');
 
       await axios
-        .post('http://localhost:8080/api/login', postData)
+        .post(`${ip}/api/login`, postData)
         .then((response) => {
           if (response.data.auth === true) {
             localStorage.setItem('token', response.data.token);
