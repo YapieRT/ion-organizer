@@ -1,4 +1,4 @@
-import '../css/MainPage.module.scss';
+//import styles from '../css/MainPage.module.scss';
 import Header from '../components/Headers/Header';
 
 function MainPage() {

@@ -10,11 +10,24 @@ function Storage() {
   const ip = process.env.REACT_APP_BACKEND_IP;
 
   const navigate = useNavigate();
+
   const [userEmail, setUserEmail] = useState('');
-  const [enteredCode, setEnteredCode] = useState('');
-  const [enteredName, setEnteredName] = useState('');
-  const [enteredQuantity, setEnteredQuantity] = useState('');
-  const [addItemResponse, setAddItemResponse] = useState('');
+
+  const [itemInfo, setItemInfo] = useState({
+    code: '',
+    name: '',
+    quantity: '',
+  });
+
+  const itemHandler = (event) => {
+    setItemInfo((prevItemInfo) => ({
+      ...prevItemInfo,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const [itemAddResponse, setItemAddResponse] = useState('');
+
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -45,9 +58,11 @@ function Storage() {
     verify();
     getItems();
   });
+
   const logOut = () => {
     localStorage.clear();
   };
+
   const handleRemove = async (item) => {
     try {
       console.log(item);
@@ -80,44 +95,33 @@ function Storage() {
       return;
     }
   };
+
   const addItemHandler = async (event) => {
     event.preventDefault();
 
     const postData = {
-      code: enteredCode,
-      name: enteredName.trim(),
+      code: itemInfo.code,
+      name: itemInfo.name.trim(),
       email: userEmail,
-      quantity: Number(enteredQuantity),
+      quantity: Number(itemInfo.quantity),
     };
     if (!postData.code || !postData.name || !postData.quantity) {
-      setAddItemResponse('Missing values');
+      setItemAddResponse('Missing values');
       return;
     }
     try {
       await axios
         .post(`${ip}/api/storage/addItem`, postData)
         .then((response) => {
-          setAddItemResponse(response.data.message);
+          setItemAddResponse(response.data.message);
         })
         .catch((error) => {
           const erorrResponse = error.response.data.message;
-          setAddItemResponse(erorrResponse);
+          setItemAddResponse(erorrResponse);
         });
       await addItemUpdate(postData);
     } catch (err) {}
   };
-
-  function codeChangeHandler(event) {
-    setEnteredCode(event.target.value);
-  }
-
-  function nameChangeHandler(event) {
-    setEnteredName(event.target.value);
-  }
-
-  function quantityChangeHandler(event) {
-    setEnteredQuantity(event.target.value);
-  }
 
   return (
     <>
@@ -133,25 +137,26 @@ function Storage() {
             <h4>Add item to your Storage:</h4>
             <div className={styles.formElement}>
               <label>Code:</label>
-              <input className={styles.labelInputText} id='code' type='text' onChange={codeChangeHandler}></input>
+              <input className={styles.labelInputText} id='code' name='code' type='text' onChange={itemHandler}></input>
             </div>
             <div className={styles.formElement}>
               <label>Name:</label>
-              <input className={styles.labelInputText} id='name' type='text' onChange={nameChangeHandler}></input>
+              <input className={styles.labelInputText} id='name' name='name' type='text' onChange={itemHandler}></input>
             </div>
             <div className={styles.formElement}>
               <label>Quantity:</label>
               <input
                 className={styles.labelInputText}
                 id='quantity'
+                name='quantity'
                 type='number'
-                onChange={quantityChangeHandler}
+                onChange={itemHandler}
               ></input>
             </div>
             <button type='submit' className={styles.buttonAddItem}>
               Add Item
             </button>
-            <p>{addItemResponse}</p>
+            <p>{itemAddResponse}</p>
           </form>
           <Link to='/storage/inventarization' className={styles.startInventarizationButton}>
             Start Inventarization

@@ -7,10 +7,21 @@ import ItemTable from '../ItemTable';
 
 function Inventarization() {
   const navigate = useNavigate();
+
   const [itemAddResponse, setItemAddResponse] = useState('');
-  const [enteredCode, setEnteredCode] = useState('');
-  const [enteredName, setEnteredName] = useState('');
-  const [enteredQuantity, setEnteredQuantity] = useState('');
+
+  const [itemInfo, setItemInfo] = useState({
+    code: '',
+    name: '',
+    quantity: '',
+  });
+
+  const itemHandler = (event) => {
+    setItemInfo((prevItemInfo) => ({
+      ...prevItemInfo,
+      [event.target.name]: event.target.value,
+    }));
+  };
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -90,9 +101,9 @@ function Inventarization() {
     event.preventDefault();
 
     const postData = {
-      code: enteredCode,
-      name: enteredName.trim(),
-      quantity: Number(enteredQuantity),
+      code: itemInfo.code,
+      name: itemInfo.name.trim(),
+      quantity: Number(itemInfo.quantity),
     };
     if (!postData.code || !postData.name || !postData.quantity) {
       setItemAddResponse('Missing values');
@@ -104,17 +115,6 @@ function Inventarization() {
     } catch (err) {}
   };
 
-  function codeChangeHandler(event) {
-    setEnteredCode(event.target.value);
-  }
-
-  function nameChangeHandler(event) {
-    setEnteredName(event.target.value);
-  }
-
-  function quantityChangeHandler(event) {
-    setEnteredQuantity(event.target.value);
-  }
   return (
     <>
       <div>
@@ -136,19 +136,32 @@ function Inventarization() {
               <h4>Add item to your Storage:</h4>
               <div className={styles.formElement}>
                 <label>Code:</label>
-                <input className={styles.labelInputText} id='code' type='text' onChange={codeChangeHandler}></input>
+                <input
+                  className={styles.labelInputText}
+                  id='code'
+                  name='code'
+                  type='text'
+                  onChange={itemHandler}
+                ></input>
               </div>
               <div className={styles.formElement}>
                 <label>Name:</label>
-                <input className={styles.labelInputText} id='name' type='text' onChange={nameChangeHandler}></input>
+                <input
+                  className={styles.labelInputText}
+                  id='name'
+                  name='name'
+                  type='text'
+                  onChange={itemHandler}
+                ></input>
               </div>
               <div className={styles.formElement}>
                 <label>Quantity:</label>
                 <input
                   className={styles.labelInputText}
                   id='quantity'
+                  name='quantity'
                   type='number'
-                  onChange={quantityChangeHandler}
+                  onChange={itemHandler}
                 ></input>
               </div>
               <button type='submit' className={styles.buttonAddItem}>

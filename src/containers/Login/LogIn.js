@@ -1,6 +1,6 @@
-import styles from '../../css/LoginAndRegistration/RegistrationLogInBody.module.scss';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import styles from '../../css/LoginAndRegistration/RegistrationLogInBody.module.scss';
 import axios from 'axios';
 
 function LogIn() {
@@ -10,27 +10,23 @@ function LogIn() {
   const ip = process.env.REACT_APP_BACKEND_IP;
 
   const [errormsg, setErrorMsg] = useState('');
-  const [enteredEmail, setEnteredEmail] = useState('');
-  const [enteredPassword, setEnteredPassword] = useState('');
 
-  function emailChangeHandler(event) {
-    setEnteredEmail(event.target.value);
-  }
-  function passwordChangeHandler(event) {
-    setEnteredPassword(event.target.value);
-  }
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    password: '',
+  });
+
+  const userInfoHandler = (event) => {
+    setUserInfo((prevUserInfo) => ({
+      ...prevUserInfo,
+      [event.target.name]: event.target.value,
+    }));
+  };
 
   const submitHandler = async (event) => {
     event.preventDefault();
     try {
-      const postData = { email: enteredEmail, password: enteredPassword };
-
-      for (let value of Object.values(postData)) {
-        if (value === '') {
-          setErrorMsg('You haven`t entered some data!');
-          return;
-        }
-      }
+      const postData = { email: userInfo.email, password: userInfo.password };
 
       setErrorMsg('');
 
@@ -41,12 +37,16 @@ function LogIn() {
             localStorage.setItem('token', response.data.token);
             setErrorMsg('');
             navigate('/storage', {});
-          } else {
-            setErrorMsg(response.data.message);
           }
         })
         .catch((error) => {
-          setErrorMsg(error.response.data.message);
+          if (error.response.data.errors && error.response.data.errors.length > 0) {
+            setErrorMsg(error.response.data.errors[0].msg);
+          } else if (error.response.data.message) {
+            setErrorMsg(error.response.data.message);
+          } else {
+            setErrorMsg('An error occurred.');
+          }
         });
     } catch (err) {}
   };
@@ -57,15 +57,22 @@ function LogIn() {
       <form onSubmit={submitHandler}>
         <div className={styles.formEmailLogIn}>
           <label>E-mail address:</label>
-          <input id='userEmail' className={styles.registrationText} type='text' onChange={emailChangeHandler}></input>
+          <input
+            id='userEmail'
+            className={styles.registrationText}
+            name='email'
+            type='text'
+            onChange={userInfoHandler}
+          ></input>
         </div>
         <div className={styles.formPasswordLogIn}>
           <label>Password:</label>
           <input
             id='userPassword'
             className={styles.registrationText}
+            name='password'
             type='password'
-            onChange={passwordChangeHandler}
+            onChange={userInfoHandler}
           ></input>
         </div>
         <button type='submit' className={styles.buttonLogIn}>

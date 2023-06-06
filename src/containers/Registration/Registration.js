@@ -1,6 +1,6 @@
-import styles from '../../css/LoginAndRegistration/RegistrationLogInBody.module.scss';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import styles from '../../css/LoginAndRegistration/RegistrationLogInBody.module.scss';
 import axios from 'axios';
 
 function Registration() {
@@ -10,41 +10,31 @@ function Registration() {
   const ip = process.env.REACT_APP_BACKEND_IP;
 
   let [errormsg, setErrorMsg] = useState('');
-  const [enteredName, setEnteredName] = useState('');
-  const [enteredEmail, setEnteredEmail] = useState('');
-  const [enteredOrganization, setEnteredOrganization] = useState('');
-  const [enteredPassword, setEnteredPassword] = useState('');
 
-  function nameChangeHandler(event) {
-    setEnteredName(event.target.value);
-  }
-  function emailChangeHandler(event) {
-    setEnteredEmail(event.target.value);
-  }
-  function organizationChangeHandler(event) {
-    setEnteredOrganization(event.target.value);
-  }
-  function passwordChangeHandler(event) {
-    setEnteredPassword(event.target.value);
-  }
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    email: '',
+    organization: '',
+    password: '',
+  });
+
+  const userInfoHandler = (event) => {
+    setUserInfo((prevUserInfo) => ({
+      ...prevUserInfo,
+      [event.target.name]: event.target.value,
+    }));
+  };
 
   const submitHandler = async (event) => {
     event.preventDefault();
     try {
       const postData = {
-        name: enteredName,
-        email: enteredEmail,
-        organization: enteredOrganization,
-        password: enteredPassword,
+        name: userInfo.name,
+        email: userInfo.email,
+        organization: userInfo.organization,
+        password: userInfo.password,
       };
 
-      for (let value of Object.values(postData)) {
-        if (value === '') {
-          setErrorMsg('You haven`t entered some data!');
-          return;
-        }
-      }
-      console.log(postData);
       setErrorMsg('');
 
       await axios
@@ -54,12 +44,16 @@ function Registration() {
             localStorage.setItem('token', response.data.token);
             setErrorMsg('');
             navigate('/storage', {});
-          } else {
-            setErrorMsg(response.data.message);
           }
         })
         .catch((error) => {
-          setErrorMsg(error.response.data.message);
+          if (error.response.data.errors && error.response.data.errors.length > 0) {
+            setErrorMsg(error.response.data.errors[0].msg);
+          } else if (error.response.data.message) {
+            setErrorMsg(error.response.data.message);
+          } else {
+            setErrorMsg('An error occurred.');
+          }
         });
     } catch (err) {}
   };
@@ -70,19 +64,32 @@ function Registration() {
       <form onSubmit={submitHandler}>
         <div className={styles.formNameRegistration}>
           <label>Enter your name:</label>
-          <input id='userName' className={styles.registrationText} type='text' onChange={nameChangeHandler}></input>
+          <input
+            id='userName'
+            className={styles.registrationText}
+            name='name'
+            type='text'
+            onChange={userInfoHandler}
+          ></input>
         </div>
         <div className={styles.formEmailRegistration}>
           <label>Enter your e-mail address:</label>
-          <input id='userEmail' className={styles.registrationText} type='text' onChange={emailChangeHandler}></input>
+          <input
+            id='userEmail'
+            className={styles.registrationText}
+            name='email'
+            type='text'
+            onChange={userInfoHandler}
+          ></input>
         </div>
         <div className={styles.formOrganizationRegistration}>
           <label>Enter your organization name:</label>
           <input
             id='userOrganizationName'
             className={styles.registrationText}
+            name='organization'
             type='text'
-            onChange={organizationChangeHandler}
+            onChange={userInfoHandler}
           ></input>
         </div>
         <div className={styles.formPasswordRegistration}>
@@ -90,8 +97,9 @@ function Registration() {
           <input
             id='userPassword'
             className={styles.registrationText}
+            name='password'
             type='password'
-            onChange={passwordChangeHandler}
+            onChange={userInfoHandler}
           ></input>
         </div>
         <button type='submit' className={styles.buttonRegister}>
