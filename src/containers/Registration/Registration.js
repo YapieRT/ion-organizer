@@ -44,10 +44,11 @@ function Registration() {
           return;
         }
       }
-
+      console.log(postData);
       setErrorMsg('');
 
-      await axios(`${ip}/api/registration`, postData)
+      await axios
+        .post(`${ip}/api/registration`, postData)
         .then((response) => {
           if (response.data.auth === true) {
             localStorage.setItem('token', response.data.token);

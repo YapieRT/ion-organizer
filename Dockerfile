@@ -3,7 +3,7 @@ FROM node:alpine as builder
 WORKDIR /app
 # Copy app files
 COPY . .
-# Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
+# Install dependencies
 RUN npm i 
 # Build the app
 RUN npm run build
