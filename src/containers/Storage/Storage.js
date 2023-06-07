@@ -7,7 +7,7 @@ import ItemTable from './ItemTable';
 function Storage() {
   document.title = 'ION - Storage';
 
-  const ip = process.env.REACT_APP_BACKEND_IP;
+  const ip = process.env.BACKEND_IP ? process.env.BACKEND_IP : process.env.REACT_APP_BACKEND_IP;
 
   const navigate = useNavigate();
 

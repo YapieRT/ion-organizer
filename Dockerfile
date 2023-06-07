@@ -11,11 +11,8 @@ RUN npm run build
 # Bundle static assets with nginx
 FROM nginx:1.21.0-alpine as production
 
-#ARG SHELL
-
-ENV NODE_ENV production
-
-#ENV SHELL=$SHELL
+# Specyfing backend_ip for fetching data
+ENV BACKEND_IP="${BACKEND_IP}"
 
 # Copy built assets from `builder` image
 COPY --from=builder /app/build /usr/share/nginx/html
