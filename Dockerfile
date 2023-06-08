@@ -12,7 +12,7 @@ RUN npm run build
 FROM nginx:1.21.0-alpine as production
 
 # Specyfing backend_ip for fetching data
-ENV BACKEND_IP=ip_to_replace
+ENV BACKEND_IP=''
 # Copy built assets from `builder` image
 COPY --from=builder /app/build /usr/share/nginx/html
 # Add your nginx.conf
