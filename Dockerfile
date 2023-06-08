@@ -4,7 +4,7 @@ WORKDIR /app
 # Copy app files
 COPY . .
 # Specyfing backend_ip for fetching data
-ENV BACKEND_IP=
+ENV REACT_APP_BACKEND_IP=
 # Install dependencies
 RUN npm i 
 # Build the app
