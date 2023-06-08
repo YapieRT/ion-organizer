@@ -7,9 +7,7 @@ function Registration() {
   document.title = 'ION - Registration';
   const navigate = useNavigate();
 
-  const ip = process.env.REACT_APP_BACKEND_IP
-    ? process.env.REACT_APP_BACKEND_IP
-    : (REACT_APP_DEFAULT_IP = 'http://localhost:8080');
+  const ip = process.env.REACT_APP_BACKEND_IP ? process.env.REACT_APP_BACKEND_IP : process.env.REACT_APP_DEFAULT_IP;
 
   let [errormsg, setErrorMsg] = useState('');
 
