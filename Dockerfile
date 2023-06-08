@@ -3,6 +3,8 @@ FROM node:alpine as builder
 WORKDIR /app
 # Copy app files
 COPY . .
+# Specyfing backend_ip for fetching data
+ENV BACKEND_IP=
 # Install dependencies
 RUN npm i 
 # Build the app
@@ -10,9 +12,6 @@ RUN npm run build
 
 # Bundle static assets with nginx
 FROM nginx:1.21.0-alpine as production
-
-# Specyfing backend_ip for fetching data
-ENV BACKEND_IP=
 # Copy built assets from `builder` image
 COPY --from=builder /app/build /usr/share/nginx/html
 # Add your nginx.conf
