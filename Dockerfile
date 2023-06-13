@@ -11,7 +11,7 @@ COPY . .
 RUN npm install
 
 # Set environment variable for the backend IP address
-ENV REACT_APP_BACKEND_IP=$BACKEND_IP
+ENV REACT_APP_BACKEND_IP=
 
 # Build the React project
 RUN npm run build
