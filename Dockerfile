@@ -18,7 +18,7 @@ RUN npm run build
 
 # Serve the built project with a static server
 RUN npm install -g serve
-CMD ["sh", "-c", "serve -s build -l $REACT_APP_IP"]
+CMD ["serve", "-s", "build"]
 
 # Expose the desired port (e.g., 80)
 EXPOSE 80
