@@ -1,22 +1,24 @@
-FROM node:alpine as builder
-# Set the working directory to /app inside the container
+# Base image
+FROM node:18-alpine
+
+# Set working directory
 WORKDIR /app
-# Copy app files
+
+# Copy the entire project
 COPY . .
-# Specyfing backend_ip for fetching data
-ENV REACT_APP_BACKEND_IP=
+
 # Install dependencies
-RUN npm i 
-# Build the app
+RUN npm install
+
+# Set environment variable for the backend IP address
+ENV REACT_APP_BACKEND_IP=$BACKEND_IP
+
+# Build the React project
 RUN npm run build
 
-# Bundle static assets with nginx
-FROM nginx:1.21.0-alpine as production
-# Copy built assets from `builder` image
-COPY --from=builder /app/build /usr/share/nginx/html
-# Add your nginx.conf
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-# Expose port
+# Serve the built project with a static server
+RUN npm install -g serve
+CMD ["serve", "-s", "build"]
+
+# Expose the desired port (e.g., 80)
 EXPOSE 80
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
