@@ -1,3 +1,4 @@
 #!/bin/sh
-sed -i "s/__REACT_APP_BACKEND_IP__/$REACT_APP_BACKEND_IP/g" /app/build/static/js/main.*.js
+npm run build
+npm install -g serve
 exec serve -s build
